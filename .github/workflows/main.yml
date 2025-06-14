@@ -38,7 +38,7 @@ jobs:
         run: npm i
 
       - name: Run npm build
-        run: npm run build
+        run: npm run build-only
 
       - name: Publish
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
