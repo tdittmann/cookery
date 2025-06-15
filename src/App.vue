@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import { IonApp } from '@ionic/vue'
+import { IonApp, IonPage } from '@ionic/vue'
 </script>
 
 <template>
   <ion-app>
-    <p></p>
-    <RouterLink to="/">Home</RouterLink>
-    <RouterLink to="/about">About</RouterLink>
-    <p></p>
-
-    <RouterView />
+    <IonPage>
+      <p>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/about">About</RouterLink>
+      </p>
+      <RouterView />
+    </IonPage>
   </ion-app>
 </template>
 

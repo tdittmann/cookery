@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { IonCard, IonPage } from '@ionic/vue'
+import { IonCard } from '@ionic/vue'
 </script>
 
 <template>
-  <IonPage>
-    <IonCard>Home</IonCard>
-  </IonPage>
+  <IonCard>Home</IonCard>
 </template>
