@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import { IonCard, IonPage } from '@ionic/vue'
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <IonPage>
+    <IonCard>Home</IonCard>
+  </IonPage>
 </template>
