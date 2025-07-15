@@ -1,18 +1,26 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import { IonApp, IonPage } from '@ionic/vue'
+import { IonApp, IonHeader, IonContent, IonPage, IonTitle, IonToolbar } from '@ionic/vue'
 </script>
 
 <template>
-  <ion-app>
+  <IonApp>
     <IonPage>
-      <p>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </p>
-      <RouterView />
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Cookery 🧑‍🍳</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <RouterView />
+      </IonContent>
     </IonPage>
-  </ion-app>
+  </IonApp>
 </template>
 
-<style scoped></style>
+<style scoped>
+ion-toolbar {
+  --background: var(--cookery-color-primary);
+  --color: #fff;
+}
+</style>
