@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IonCard, IonCardHeader, IonCardTitle } from '@ionic/vue'
+import { IonCard, IonCardHeader, IonCardTitle, IonCol, IonGrid, IonRow } from '@ionic/vue'
 import { onMounted, ref } from 'vue'
 import { CookeryService, type RecipeJson } from '@/services/cookery.service.ts'
 import LoadingComponent from '@/components/LoadingComponent.vue'
@@ -22,18 +22,31 @@ onMounted(() => {
   <LoadingComponent :loading="loading" />
 
   <div class="ion-padding">
-    <IonCard v-for="recipe in recipes" v-bind:key="recipe.id" class="ion-margin-vertical">
-      <div
-        class="recipe-background"
-        :style="{ backgroundImage: `url(${environment.backendUrl}/images/${recipe.image})` }"
-      />
+    <IonGrid>
+      <IonRow>
+        <IonCol
+          size="12"
+          size-lg="3"
+          size-md="4"
+          size-sm="6"
+          v-for="recipe in recipes"
+          v-bind:key="recipe.id"
+        >
+          <IonCard class="ion-margin-vertical">
+            <div
+              class="recipe-background"
+              :style="{ backgroundImage: `url(${environment.backendUrl}/images/${recipe.image})` }"
+            />
 
-      <IonCardHeader>
-        <IonCardTitle>
-          {{ recipe.title }}
-        </IonCardTitle>
-      </IonCardHeader>
-    </IonCard>
+            <IonCardHeader>
+              <IonCardTitle>
+                {{ recipe.title }}
+              </IonCardTitle>
+            </IonCardHeader>
+          </IonCard>
+        </IonCol>
+      </IonRow>
+    </IonGrid>
   </div>
 </template>
 
