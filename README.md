@@ -2,6 +2,8 @@
 
 Web application for favourite recipes.
 
+[![build](https://github.com/tdittmann/cookery/actions/workflows/main.yml/badge.svg)](https://github.com/tdittmann/cookery/actions/workflows/main.yml)
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
