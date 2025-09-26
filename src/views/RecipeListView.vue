@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IonCard, IonCardHeader, IonCardTitle, IonCol, IonGrid, IonRow } from '@ionic/vue'
+import { IonGrid, IonRow } from '@ionic/vue'
 import { onMounted, ref } from 'vue'
 import { CookeryService, type RecipeJson } from '@/services/cookery.service.ts'
 import LoadingComponent from '@/components/LoadingComponent.vue'
@@ -24,27 +24,24 @@ onMounted(() => {
   <div class="ion-padding">
     <IonGrid>
       <IonRow>
-        <IonCol
-          size="12"
-          size-lg="3"
-          size-md="4"
-          size-sm="6"
-          v-for="recipe in recipes"
-          v-bind:key="recipe.id"
-        >
-          <IonCard class="ion-margin-vertical">
+        <section class="tiles">
+          <article
+            class="style3"
+            v-for="recipe in recipes"
+            v-bind:key="recipe.id"
+            style="aspect-ratio: 1 / 1"
+          >
             <div
-              class="recipe-background"
-              :style="{ backgroundImage: `url(${environment.backendUrl}/images/${recipe.image})` }"
+              class="recipe-background image"
+              :style="{
+                backgroundImage: `url(${environment.backendUrl}/images/${recipe.image})`,
+              }"
             />
-
-            <IonCardHeader>
-              <IonCardTitle>
-                {{ recipe.title }}
-              </IonCardTitle>
-            </IonCardHeader>
-          </IonCard>
-        </IonCol>
+            <a href="/">
+              <h2>{{ recipe.title }}</h2>
+            </a>
+          </article>
+        </section>
       </IonRow>
     </IonGrid>
   </div>
@@ -54,6 +51,6 @@ onMounted(() => {
 .recipe-background {
   background-size: cover;
   background-position: center;
-  height: 150px;
+  height: 100%;
 }
 </style>

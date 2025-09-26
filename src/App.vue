@@ -1,18 +1,31 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import { IonApp, IonHeader, IonContent, IonPage, IonTitle, IonToolbar } from '@ionic/vue'
+import { IonApp, IonContent, IonHeader, IonPage, IonToolbar } from '@ionic/vue'
 </script>
 
 <template>
   <IonApp>
     <IonPage>
+      <!-- Header -->
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Cookery 🧑‍🍳</IonTitle>
+          <header id="header">
+            <div class="inner">
+              <a href="/" class="logo">
+                <span class="symbol"></span>
+                <span class="title">🧑‍🍳 Cookery</span>
+              </a>
+            </div>
+          </header>
         </IonToolbar>
       </IonHeader>
+
       <IonContent>
-        <RouterView />
+        <div id="main">
+          <div class="inner">
+            <RouterView />
+          </div>
+        </div>
       </IonContent>
     </IonPage>
   </IonApp>
