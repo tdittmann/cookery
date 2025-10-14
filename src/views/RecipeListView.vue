@@ -28,7 +28,6 @@ onMounted(() => {
 <template>
   <LoadingComponent :loading="loading" />
 
-  <div class="ion-padding">
     <IonGrid>
       <IonRow>
         <section class="tiles">
@@ -36,7 +35,7 @@ onMounted(() => {
             class="style3"
             v-for="recipe in recipes"
             v-bind:key="recipe.id"
-            style="aspect-ratio: 1 / 1"
+            style="aspect-ratio: 1 / 1; max-height: 200px;"
             @click="openRecipe(recipe.id)"
           >
             <div
@@ -50,7 +49,6 @@ onMounted(() => {
         </section>
       </IonRow>
     </IonGrid>
-  </div>
 </template>
 
 <style scoped>
