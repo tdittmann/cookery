@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { CookeryService, type RecipeJson } from '@/services/cookery.service.ts'
+import { CookeryService, type Recipe } from '@/services/cookery.service.ts'
 import LoadingComponent from '@/components/LoadingComponent.vue'
 import { useRoute } from 'vue-router'
 import { environment } from '@/environment/environment.ts'
@@ -9,7 +9,7 @@ import { IonIcon } from '@ionic/vue'
 const route = useRoute()
 
 const loading = ref<boolean>(false)
-const recipe = ref<RecipeJson | undefined>()
+const recipe = ref<Recipe | undefined>()
 
 const loadRecipeById = (id: string | string[]) => {
   loading.value = true
@@ -31,6 +31,29 @@ const recipeImage = computed<string>(() => {
   }
   return ''
 })
+
+const recalculatePortions = (portionsToAddOrReduce: number) => {
+  if (recipe.value?.portions) {
+    const initialPortions = recipe.value.portions
+    const newPortions = recipe.value.portions + portionsToAddOrReduce
+
+    if (newPortions <= 0) {
+      return
+    }
+
+    const factor = newPortions / initialPortions
+    recipe.value.portions = newPortions
+    recipe.value.ingredient_categories.forEach((category) => {
+      category.ingredients.forEach((ingredient) => {
+        ingredient.count *= factor
+      })
+    })
+  }
+}
+
+const roundIngredientCount = (count: number) => {
+  return Math.round(count * 100) / 100;
+}
 
 watch(
   () => route.params.id,
@@ -56,8 +79,15 @@ watch(
       :style="{ backgroundImage: `url(${recipeImage})` }"
     />
     <h3 v-if="recipe.portions" class="recipe-portions">
-      <ion-icon name="person-circle-outline" size="large"></ion-icon>
-      {{ recipe.portions }}
+      <ion-icon
+        name="remove-circle-outline"
+        size="large"
+        @click="recalculatePortions(-1)"
+      ></ion-icon>
+
+      {{ recipe.portions }} {{ recipe.portions_unit }}
+
+      <ion-icon name="add-circle-outline" size="large" @click="recalculatePortions(1)"></ion-icon>
     </h3>
 
     <h2 class="recipe-ingredients no-margin-bottom">Zutaten</h2>
@@ -71,8 +101,8 @@ watch(
       <ul class="alt">
         <template v-for="ingredient in ingredientCategory.ingredients" :key="ingredient.id">
           <li>
-            {{ ingredient.count === "0" ? "" : ingredient.count }}
-            {{ ingredient.shortcut }}
+            {{ ingredient.count ? roundIngredientCount(ingredient.count) : '' }}
+            {{ ingredient.shortcutUnit }}
             {{ ingredient.description }}
           </li>
         </template>

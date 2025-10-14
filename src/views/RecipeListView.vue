@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { IonGrid, IonRow } from '@ionic/vue'
 import { onMounted, ref } from 'vue'
-import { CookeryService, type RecipeJson } from '@/services/cookery.service.ts'
+import { CookeryService, type Recipe } from '@/services/cookery.service.ts'
 import LoadingComponent from '@/components/LoadingComponent.vue'
 import { environment } from '@/environment/environment.ts'
 import { useRouter } from 'vue-router'
@@ -9,9 +9,9 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const loading = ref<boolean>(false)
-const recipes = ref<RecipeJson[]>([])
+const recipes = ref<Recipe[]>([])
 
-const openRecipe = (id: string) => {
+const openRecipe = (id: number) => {
   router.push(`/recipe/${id}`)
 }
 
