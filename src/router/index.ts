@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "@ionic/vue-router";
 import RecipeListView from '@/views/RecipeListView.vue'
 
 const router = createRouter({
@@ -10,12 +10,9 @@ const router = createRouter({
       component: RecipeListView,
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
+      path: '/recipe/:id',
+      name: 'recipe',
+      component: () => import("../views/RecipeDetailView.vue"),
     },
   ],
 })

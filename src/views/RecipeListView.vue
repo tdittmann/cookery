@@ -4,9 +4,16 @@ import { onMounted, ref } from 'vue'
 import { CookeryService, type RecipeJson } from '@/services/cookery.service.ts'
 import LoadingComponent from '@/components/LoadingComponent.vue'
 import { environment } from '@/environment/environment.ts'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const loading = ref<boolean>(false)
 const recipes = ref<RecipeJson[]>([])
+
+const openRecipe = (id: string) => {
+  router.push(`/recipe/${id}`)
+}
 
 onMounted(() => {
   loading.value = true
@@ -30,6 +37,7 @@ onMounted(() => {
             v-for="recipe in recipes"
             v-bind:key="recipe.id"
             style="aspect-ratio: 1 / 1"
+            @click="openRecipe(recipe.id)"
           >
             <div
               class="recipe-background image"
@@ -37,9 +45,7 @@ onMounted(() => {
                 backgroundImage: `url(${environment.backendUrl}/images/${recipe.image})`,
               }"
             />
-            <a href="/">
-              <h2>{{ recipe.title }}</h2>
-            </a>
+            <h2>{{ recipe.title }}</h2>
           </article>
         </section>
       </IonRow>
@@ -52,5 +58,6 @@ onMounted(() => {
   background-size: cover;
   background-position: center;
   height: 100%;
+  cursor: pointer;
 }
 </style>

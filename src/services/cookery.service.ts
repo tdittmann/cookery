@@ -28,8 +28,17 @@ export interface IngredientJson {
   shortcut: string
 }
 
-const loadRecipes = () => {
+const loadRecipes = (): Promise<RecipeJson[]> => {
   return fetch(`${environment.backendUrl}/recipes`, {
+    headers: new Headers({
+      Authorization:
+        'Basic ' + btoa(`${environment.backendAuthUser}:${environment.backendAuthPassword}`),
+    }),
+  }).then((response) => response.json())
+}
+
+const loadRecipeById = (id: number): Promise<RecipeJson> => {
+  return fetch(`${environment.backendUrl}/recipes?id=${id}`, {
     headers: new Headers({
       Authorization:
         'Basic ' + btoa(`${environment.backendAuthUser}:${environment.backendAuthPassword}`),
@@ -39,4 +48,5 @@ const loadRecipes = () => {
 
 export const CookeryService = {
   loadRecipes,
+  loadRecipeById,
 }
