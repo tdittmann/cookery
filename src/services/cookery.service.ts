@@ -79,7 +79,7 @@ const toIngredient = (json: IngredientJson): Ingredient => {
   return {
     id: parseInt(json.ingredient_id, 10),
     description: json.description,
-    count: parseInt(json.count, 10),
+    count: Number(json.count.replace(',', '.')),
     shortcutUnit: json.shortcut,
   }
 }
